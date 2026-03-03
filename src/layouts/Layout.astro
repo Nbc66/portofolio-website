@@ -6,16 +6,28 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  type?: string;
+  ogTitle?: string;
+  ogDescription?: string;
 }
 
 const {
   title = "Kerim Čamdžić - Gameplay Programmer",
   description = "Gameplay & Systems Programmer working with Source SDK and C++.",
-  image = "/images/default-og.jpg"
-} = Astro.props;
+  image = "/images/default-og.jpg",
+  type = "website",
+  ogTitle,
+  ogDescription
+} = Astro.props as Props;
 
-const absoluteImage = new URL(image, Astro.site).toString();
-const absoluteUrl = new URL(Astro.url.pathname, Astro.site).toString();
+// Make absolute URLs safely (only if Astro.site configured)
+const absoluteImage = image
+  ? (Astro.site ? new URL(image, Astro.site).toString() : image)
+  : "/images/default-og.jpg";
+
+const absoluteUrl = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site).toString()
+  : Astro.url.pathname;
 ---
 
 <!doctype html>
@@ -26,22 +38,23 @@ const absoluteUrl = new URL(Astro.url.pathname, Astro.site).toString();
 		  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		  <link rel="icon" href="/favicon.ico" />
 		  <meta name="generator" content={Astro.generator} />
-				
-		  <title>{title}</title>
-		  <meta name="description" content={description} />
-				
-		  <!-- OpenGraph -->
-		  <meta property="og:type" content="website" />
-		  <meta property="og:title" content={title} />
-		  <meta property="og:description" content={description} />
-		  <meta property="og:url" content={absoluteUrl} />
-		  <meta property="og:image" content={absoluteImage} />
-				
-		  <!-- Twitter -->
-		  <meta name="twitter:card" content="summary_large_image" />
-		  <meta name="twitter:title" content={title} />
-		  <meta name="twitter:description" content={description} />
-		  <meta name="twitter:image" content={absoluteImage} />
+
+  		<title>{title}</title>
+  		<meta name="description" content={description} />
+			<meta name="theme-color" content="#f59e0b" />
+
+  		<!-- OpenGraph -->
+  		<meta property="og:type" content={type} />
+  		<meta property="og:title" content={ogTitle ?? title} />
+  		<meta property="og:description" content={ogDescription ?? description} />
+  		<meta property="og:url" content={absoluteUrl} />
+  		<meta property="og:image" content={absoluteImage} />
+
+  		<!-- Twitter -->
+  		<meta name="twitter:card" content="summary_large_image" />
+  		<meta name="twitter:title" content={ogTitle ?? title} />
+  		<meta name="twitter:description" content={ogDescription ?? description} />
+  		<meta name="twitter:image" content={absoluteImage} />
 		</head>
 	<body class="relative bg-zinc-950 text-zinc-200 font-sans overflow-x-hidden">
 		<Navbar />

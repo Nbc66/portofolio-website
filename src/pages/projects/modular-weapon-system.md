@@ -1,13 +1,9 @@
 ---
-description: A data-driven, network-safe modular attachment framework
-  for Source SDK 2013
 layout: ../../layouts/ProjectLayout.astro
-tags:
-- C++
-- Source SDK 2013
-- Gameplay Systems
-- Networking
 title: Modular Weapon Attachment System
+description: A data-driven, network-safe modular attachment framework for Source SDK 2013
+ogTitle: Modular Weapon Attachment System — Deep Technical Breakdown
+ogDescription: A data-driven, network-safe modular attachment framework for Source SDK 2013
 ---
 
 # Modular Weapon Attachment System

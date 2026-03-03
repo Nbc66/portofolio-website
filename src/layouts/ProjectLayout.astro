@@ -1,9 +1,31 @@
 ---
 import Layout from "./Layout.astro";
-const { title } = Astro.props;
+
+const front = Astro.props.frontmatter ?? {};
+
+const siteName = "Kerim Čamdžić";
+
+function buildTitle(t?: string) {
+  if (!t) return siteName;
+  return `${t} - ${siteName}`;
+}
+
+const title = buildTitle(front.title);
+const description = front.description;
+const image = front.image;
+
+const ogTitle = buildTitle(front.ogTitle ?? front.title);
+const ogDescription = front.ogDescription ?? front.description;
 ---
 
-<Layout title={title}>
+<Layout
+  title={title}
+  description={description}
+  image={image}
+  ogTitle={ogTitle}
+  ogDescription={ogDescription}
+  type="article"
+>
   <div class="pt-32 pb-24">
     <article class="
       prose prose-invert
