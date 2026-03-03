@@ -1,0 +1,80 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const meta = {
+  title: "About – Kerim Čamdžić",
+  description: "Gameplay programmer specializing in C++, Source Engine, multiplayer systems, and backend integration.",
+  image: "/images/homepage-og.jpg"
+};
+---
+
+<Layout {...meta}>
+  <section class="max-w-4xl mx-auto px-6 py-20">
+
+    <h1 class="text-3xl sm:text-4xl font-bold mb-8">
+      About Me
+    </h1>
+
+    <div class="space-y-6 text-zinc-300 leading-relaxed text-base sm:text-lg">
+
+      <p>
+        I'm <span class="text-white font-medium">Kerim Čamdžić</span>, a gameplay and systems programmer 
+        focused on building scalable, maintainable game architecture.
+      </p>
+
+      <p>
+        I specialize in <span class="text-white">C++ development</span> within the 
+        Source Engine ecosystem, working on multiplayer systems, weapon frameworks, 
+        engine modifications, and gameplay feature implementation.
+      </p>
+
+      <p>
+        My experience includes contributing to large community-driven projects such as 
+        Lambda Fortress, Open Fortress, and Hunt Down The Freeman, where I worked on 
+        gameplay programming and backend integration.
+      </p>
+
+      <p>
+        Beyond gameplay systems, I have built backend services using Python and FastAPI, 
+        implemented API integrations inside game clients, and worked on multiplayer-safe 
+        synchronization systems.
+      </p>
+
+      <p>
+        I care deeply about clean architecture, performance, and writing systems that scale 
+        rather than one-off features that accumulate technical debt.
+      </p>
+
+    </div>
+
+    <div class="mt-16">
+      <h2 class="text-xl sm:text-2xl font-semibold mb-6">
+        Core Focus Areas
+      </h2>
+
+      <ul class="grid sm:grid-cols-2 gap-4 text-zinc-400 text-sm sm:text-base">
+        <li>• Gameplay Systems Architecture</li>
+        <li>• Multiplayer & Networking Logic</li>
+        <li>• Source SDK 2013 Modding</li>
+        <li>• Modular Weapon Frameworks</li>
+        <li>• Engine-Level Debugging</li>
+        <li>• Backend API Integration</li>
+        <li>• Performance Optimization</li>
+        <li>• Systems Refactoring & Cleanup</li>
+      </ul>
+    </div>
+
+    <div class="mt-16">
+      <h2 class="text-xl sm:text-2xl font-semibold mb-6">
+        Philosophy
+      </h2>
+
+      <p class="text-zinc-400 leading-relaxed">
+        I approach gameplay programming as systems engineering. 
+        Features should be extensible, deterministic, and multiplayer-safe. 
+        I prefer solving problems at the architectural level rather than patching symptoms.
+      </p>
+    </div>
+
+  </section>
+</Layout>

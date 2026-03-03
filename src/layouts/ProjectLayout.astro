@@ -1,0 +1,39 @@
+---
+import Layout from "./Layout.astro";
+const { title } = Astro.props;
+---
+
+<Layout title={title}>
+  <div class="pt-32 pb-24">
+    <article class="
+      prose prose-invert
+      max-w-3xl mx-auto px-6
+
+      prose-headings:font-semibold
+      prose-headings:tracking-tight
+      prose-h1:text-4xl
+      prose-h2:text-2xl
+      prose-h2:mt-16
+      prose-h2:border-b
+      prose-h2:border-zinc-800
+      prose-h2:pb-3
+
+      prose-p:text-zinc-400
+      prose-li:text-zinc-400
+
+      prose-strong:text-white
+
+      prose-code:text-orange-400
+      prose-code:before:content-none
+      prose-code:after:content-none
+
+      prose-pre:bg-zinc-900
+      prose-pre:border
+      prose-pre:border-zinc-800
+      prose-pre:rounded-xl
+      prose-pre:shadow-lg
+    ">
+      <slot />
+    </article>
+  </div>
+</Layout>

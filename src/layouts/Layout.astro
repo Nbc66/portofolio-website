@@ -1,23 +1,210 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = "Kerim Čamdžić - Gameplay Programmer",
+  description = "Gameplay & Systems Programmer working with Source SDK and C++.",
+  image = "/images/default-og.jpg"
+} = Astro.props;
+
+const absoluteImage = new URL(image, Astro.site).toString();
+const absoluteUrl = new URL(Astro.url.pathname, Astro.site).toString();
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
+  	<head>
+		  <meta charset="UTF-8" />
+		  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		  <link rel="icon" href="/favicon.ico" />
+		  <meta name="generator" content={Astro.generator} />
+				
+		  <title>{title}</title>
+		  <meta name="description" content={description} />
+				
+		  <!-- OpenGraph -->
+		  <meta property="og:type" content="website" />
+		  <meta property="og:title" content={title} />
+		  <meta property="og:description" content={description} />
+		  <meta property="og:url" content={absoluteUrl} />
+		  <meta property="og:image" content={absoluteImage} />
+				
+		  <!-- Twitter -->
+		  <meta name="twitter:card" content="summary_large_image" />
+		  <meta name="twitter:title" content={title} />
+		  <meta name="twitter:description" content={description} />
+		  <meta name="twitter:image" content={absoluteImage} />
+		</head>
+	<body class="relative bg-zinc-950 text-zinc-200 font-sans overflow-x-hidden">
+		<Navbar />
+	  <!-- Parallax Grid Layer -->
+	  <div id="grid-layer" class="fixed inset-0 pointer-events-none opacity-20">
+	    <svg
+	      class="w-full h-full"
+	      xmlns="http://www.w3.org/2000/svg"
+	    >
+	      <defs>
+	        <pattern id="devgrid" width="128" height="128" patternUnits="userSpaceOnUse">
+	          <line x1="0" y1="0" x2="0" y2="128"
+	                stroke="#f59e0b" stroke-width="1" />
+	          <line x1="0" y1="0" x2="128" y2="0"
+	                stroke="#f59e0b" stroke-width="1" />
+	        </pattern>
+
+	        <pattern id="devgrid-labels" width="768" height="768" patternUnits="userSpaceOnUse">
+			  <!-- WALL Text -->
+	          <text
+	            x="8"
+	            y="10"
+	            dominant-baseline="hanging"
+	            fill="#f59e0b"
+	            font-size="19"
+	            font-family="monospace"
+	            opacity="1.65"
+	          >
+			   WALL
+			  </text>
+			  <!-- Line -->
+			  <line
+			    x1="8"
+			    y1="30"
+			    x2="100"
+			    y2="30"
+			    stroke="#f59e0b"
+			    stroke-width="2"
+			  />
+			  <!-- Dimension Text -->
+			  <text
+	            x="8"
+	            y="35"
+	            dominant-baseline="hanging"
+	            fill="#f59e0b"
+	            font-size="19"
+	            font-family="monospace"
+	            opacity="1.65"
+	          >
+	            128.128
+	          </text>
+	        </pattern>
+	      </defs>
+
+	      <rect width="100%" height="100%" fill="url(#devgrid)" />
+	      <rect width="100%" height="100%" fill="url(#devgrid-labels)" />
+	    </svg>
+	  </div>
+
+	  <!-- Content -->
+		<div class="relative z-10">
+		    <slot />
+		</div>
+
+	<!-- Scroll Parallax Script -->
+	<script>
+	  const pattern = document.getElementById('devgrid');
+	  const labelPattern = document.getElementById('devgrid-labels');
+
+	  window.addEventListener('scroll', () => {
+		const scrollY = window.scrollY;
+
+		const offset = scrollY * 0.05;
+
+		if (pattern) {
+		  pattern.setAttribute(
+			"patternTransform",
+			`translate(0, ${offset})`
+		  );
+		}
+
+		if (labelPattern) {
+		  labelPattern.setAttribute(
+			"patternTransform",
+			`translate(0, ${offset})`
+		  );
+		}
+	  });
+	</script>
+	<script>
+	  const konamiCode = [
+	    "ArrowUp",
+	    "ArrowUp",
+	    "ArrowDown",
+	    "ArrowDown",
+	    "ArrowLeft",
+	    "ArrowRight",
+	    "ArrowLeft",
+	    "ArrowRight",
+	    "b",
+	    "a"
+	  ];
+
+	  const impulesCode = [
+		"i",
+		"m",
+		"p",
+		"u",
+		"l",
+		"s",
+		"e",
+		" ",
+		"1",
+		"0",
+		"1",
+	  ];
+
+	  let keySequence: string[] = [];
+
+	  function activateEasterEgg() {
+		console.log("Konami activated");
+
+			// Example effect: invert the grid color
+			if (document.body.classList.contains("konami-active")) {
+			  document.body.classList.remove("konami-active");
+			} else {
+			document.body.classList.add("konami-active");
+			}
+	  }
+
+	  function activateImpules() {
+			console.log("Impules 101 activated");
+			const audio = new Audio('sound/battery_pickup.wav');
+			audio.volume = 0.25; // Set volume to 30%
+	  	// Play the sound
+	  	audio.play(); 
+	  }
+
+	  document.addEventListener("keydown", (e) => {
+			const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+	    keySequence.push(key);
+
+	    if (keySequence.length > impulesCode.length) {
+	      keySequence.shift();
+	    }
+
+	    const matched_konami = konamiCode.every(
+	      (key, index) => key === keySequence[index]
+	    );
+
+		const matched_impules = impulesCode.every(
+	      (key, index) => key === keySequence[index]
+	    );
+
+	    if (matched_konami) {
+	      activateEasterEgg();
+	      keySequence = [];
+		}
+	    if (matched_impules) {
+	      activateImpules();
+	      keySequence = [];
+	    }
+	  });
+	</script>
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

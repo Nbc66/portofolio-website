@@ -1,0 +1,143 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import hdtf from "../assets/hdtf.jpg";
+import lambda from "../assets/lambda.jpg";
+import openfortress from "../assets/open-fortress.jpg";
+import nightmareHouse from "../assets/nightmare_house.jpg";
+---
+<Layout title="Projects - Kerim Čamdžić"
+  description="A showcase of my gameplay programming projects, including Source SDK 2013 mods and standalone games. Explore my work on engine systems, multiplayer features, and gameplay mechanics."
+  image="/images/projects-og.png">
+  <section class="pt-24 pb-24 max-w-5xl mx-auto px-6 space-y-16">
+
+    <h1 class="text-4xl font-bold">Projects</h1>
+
+    <ProjectCard
+      title="Source SDK 2013 Comunity Edititon"
+      description="
+       Source SDK 2013 Community Edition (SDK2013 CE) is a community-driven modernization of Valve's original Source SDK 2013,
+       founded and led by me. The project focuses on resolving long-standing engine issues, improving codebase maintainability,
+       and expanding the SDK's extensibility for advanced gameplay and networking systems. SDK2013 CE aims to provide a stable,
+       forward-looking foundation for Source Engine mod development while preserving compatibility with the original architecture."
+      tags={["C++", "Source SDK 2013", "Framework Development"]}
+      links={[
+        { label: "GitHub Repo", url: "https://github.com/Nbc66/source-sdk-2013-ce", external: true, type: "github" },
+      ]}
+    />
+
+    <ProjectCard
+      title="Nightmare House: The Original Mod"
+      description="Lead Programmer responsible for ~90% of the project's technical work. Migrated the original mod to Mapbase, modernizing the codebase and engine capabilities. Integrated Steamworks and Discord Game SDK, implemented achievements and platform features, handled full CI/CD pipeline setup, and led gameplay programming across systems and polish passes."
+      backgroundImage={nightmareHouse}
+      backgroundPosition="50% 30%"
+      tags={[
+        "C++",
+        "Source SDK 2013",
+        "Mapbase",
+        "Gameplay Programming",
+        "Steamworks API",
+        "Discord Game SDK",
+        "CI/CD",
+        "Engine Modernization"
+      ]}
+      links={[
+        {
+          label: "Steam Page",
+          url: "https://store.steampowered.com/app/2954780/Nightmare_House_The_Original_Mod/",
+          external: true,
+          type: "steam"
+        }
+      ]}
+    />
+
+    <ProjectCard
+      title="Hunt Down the Freeman"
+      description="Contributed to gameplay programming and built a backend system using FastAPI to validate Patreon access for development builds. Implemented in-game API integration to securely authenticate players and retrieve entitlement data from a custom web service."
+      backgroundImage={hdtf}
+      backgroundPosition='50% 20%'
+      tags={[
+        "C++",
+        "Source SDK",
+        "Gameplay Programming",
+        "FastAPI",
+        "Backend Integration",
+        "Web API"
+      ]}
+      links={[
+        {
+          label: "Steam Page",
+          url: "https://store.steampowered.com/app/723390/Hunt_Down_the_Freeman/",
+          external: true,
+          type: "steam"
+        }
+      ]}
+    />
+
+    <ProjectCard
+      title="Modular Weapon System (Source SDK 2013)"
+      description="Implemented dynamic stat modification based on attachments. Designed extensible weapon architecture supporting runtime behavior changes."
+      tags={["C++", "Source SDK 2013", "Gameplay Systems"]}
+      links={[
+        { label: "GitHub Repo", url: "https://github.com/Nbc66/mapbase-extras/tree/fracture_main/sp/src/game/shared/modular_weapons", external: true, type: "github" },
+        { label: "Technical Breakdown", url: "/projects/modular-weapon-system", external: false },
+      ]}
+    />
+
+    <ProjectCard
+      title="Lambda Fortress"
+      description="A standalone class-based FPS built on Source SDK 2013, merging Team Fortress-style mechanics into Half-Life campaign environments. Worked on core gameplay systems, multiplayer synchronization, engine-level bug fixes, and large-scale C++ systems integration."
+      tags={[
+        "C++",
+        "Source SDK 2013",
+        "Gameplay Programming",
+        "Multiplayer",
+        "Engine Modding",
+        "Systems Architecture"
+      ]}
+      links={[
+        {
+          label: "Official Website",
+          url: "https://coaxion.games/?=lambda_fortress",
+          external: true,
+          type: "website"
+        },
+        {
+          label: "Steam Page",
+          url: "https://store.steampowered.com/app/3564500/Lambda_Fortress/",
+          external: true,
+          type: "steam"
+        }
+      ]},
+      backgroundImage={lambda}
+    />
+
+    <ProjectCard
+      title="Open Fortress"
+      description="Gameplay programmer on a standalone arena FPS built on Source SDK 2013. Contributed to core weapon behavior, class mechanics, and gameplay systems within a fast-paced multiplayer environment inspired by classic arena shooters."
+      backgroundImage={openfortress}
+      tags={[
+        "C++",
+        "Source SDK 2013",
+        "Gameplay Programming",
+        "Multiplayer",
+        "FPS Systems"
+      ]}
+      links={[
+        {
+          label: "Official Website",
+          url: "https://openfortress.fun",
+          external: true,
+          type: "website"
+        },
+        {
+          label: "Steam Page",
+          url: "https://store.steampowered.com/app/3561320/Open_Fortress/",
+          external: true,
+          type: "steam"
+        }
+      ]}
+    />
+
+  </section>
+</Layout>   

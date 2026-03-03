@@ -1,0 +1,179 @@
+---
+import type { IconType } from '../lib/icons.ts';
+import Icon from './Icon.astro';
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Link {
+  label: string;
+  url: string;
+  external?: boolean;
+  type?: IconType;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  tags: string[];
+  backgroundImage?: ImageMetadata; // Astro image import
+  backgroundPosition?: string;
+  links?: Link[];
+}
+
+const { title, description, tags, backgroundImage, backgroundPosition = "center", links = [] } = Astro.props as Props;
+---
+<article
+  class="group relative overflow-hidden border border-zinc-800 rounded-xl p-6 sm:p-8 backdrop-blur-sm hover:border-orange-500/40 transition"
+>
+  {backgroundImage && (
+  <Image
+    src={backgroundImage}
+    alt=""
+    widths={[200, 400, 800, 1200, 1600]}
+    sizes="(max-width: 768px) 100vw, 800px"
+    class="
+      absolute inset-0 -z-20
+      w-full h-full
+      object-cover
+      pointer-events-none
+      transition-all duration-500
+
+      blur-0 brightness-100
+      max-sm:blur-sm
+      max-sm:brightness-75
+
+      group-hover:scale-105
+      group-hover:blur-sm
+      group-hover:brightness-75
+    "
+    style={`object-position: ${backgroundPosition};`}
+  />
+  <div
+        class="absolute inset-0 -z-10 bg-black/50 transition-all duration-500 group-hover:bg-black/70 pointer-events-none"
+  />
+  )}
+
+  <!-- Content -->
+  <div class="relative z-20">
+    <h2 class="text-2xl font-semibold">
+      {title}
+    </h2>
+
+    <p class="mt-4 text-zinc-400 max-w-3xl">
+      {description}
+    </p>
+
+    <div class="mt-6 flex flex-wrap gap-3 text-sm">
+      {tags.map(tag => (
+        <span class="px-3 py-1 bg-zinc-800/80 rounded-md backdrop-blur-sm">
+          {tag}
+        </span>
+      ))}
+    </div>
+
+    {links.length > 0 && (
+      <div class="mt-8 flex gap-4 flex-wrap">
+        {links.map(link => (
+          <a
+            href={link.url}
+            target={link.external ? "_blank" : undefined}
+            rel={link.external ? "noopener noreferrer" : undefined}
+            class="inline-flex items-center gap-2 px-3 py-1 bg-gray-800/80 rounded-md transition-colors hover:text-orange-400"
+          >
+            {link.type && <Icon type={link.type} />}
+            {link.label}
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+</article>
+
+<!-- Script: sample image color and set card background -->
+<script>
+   if (!(window as any).__bgSamplerInitialized) {
+    (window as any).__bgSamplerInitialized = true;
+  (() => {
+    // Cache per image URL
+    const cache = new Map<string, string>();
+
+    // Utility: compute average color from Image object (resized for speed)
+    function sampleAverageColorFromImage(img: HTMLImageElement, sampleSize = 64): Promise<{ r: number; g: number; b: number }> {
+      return new Promise((resolve, reject) => {
+        try {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+
+          if (!ctx) {
+            reject(new Error('Failed to get canvas context'));
+            return;
+          }
+
+          // Keep sampleSize square; maintain aspect by drawing scaled to fit
+          canvas.width = sampleSize;
+          canvas.height = sampleSize;
+
+          // Draw image scaled to sampleSize x sampleSize
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+          const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+          let r = 0, g = 0, b = 0, count = 0;
+
+          for (let i = 0; i < data.length; i += 4) {
+            const alpha = data[i + 3];
+            // ignore fully transparent pixels
+            if (alpha === 0) continue;
+            r += data[i];
+            g += data[i + 1];
+            b += data[i + 2];
+            count++;
+          }
+
+          if (count === 0) return resolve({ r: 44, g: 44, b: 44 }); // fallback
+
+          r = Math.round(r / count);
+          g = Math.round(g / count);
+          b = Math.round(b / count);
+
+          resolve({ r, g, b });
+        } catch (err) {
+          reject(err);
+        }
+      });
+    }
+
+    // Darken / adjust color for good overlay contrast
+    function darken({ r, g, b }: { r: number; g: number; b: number }, factor = 0.55) {
+      return {
+        r: Math.round(r * factor),
+        g: Math.round(g * factor),
+        b: Math.round(b * factor)
+      };
+    }
+
+    // Main
+    document.querySelectorAll('[data-bg-card]').forEach(card => {
+    const cardElement = card as HTMLElement;
+    const img = card.querySelector('img[src*="_astro"]') as HTMLImageElement | null;
+    if (!img) return;
+
+    const handleLoad = async () => {
+      try {
+        const avg = await sampleAverageColorFromImage(img, 64);
+        const dark = darken(avg, 0.5);
+        const rgba = `rgba(${dark.r}, ${dark.g}, ${dark.b}, 0.42)`;
+        cardElement.style.backgroundColor = rgba;
+      } catch (err) {
+        cardElement.style.backgroundColor = 'rgba(30,30,30,0.6)';
+      }
+    };
+
+    if (img.complete) {
+      handleLoad();
+    } else {
+      img.addEventListener('load', handleLoad);
+    }
+  });
+  })();
+  }
+</script>

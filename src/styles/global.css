@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@plugin "@tailwindcss/typography";
+
+.konami-active #grid-layer {
+  filter: hue-rotate(180deg);
+  transition: filter 1.5s ease-in;
+}
+
+impules-active #grid-layer {
+  filter: hue-rotate(90deg);
+  transition: filter 1.5s ease-in;
+}
+
+html {
+  overflow-y: scroll;
+}

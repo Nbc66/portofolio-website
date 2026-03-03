@@ -1,0 +1,58 @@
+---
+const pathname = Astro.url.pathname;
+
+const links = [
+  { name: "Home", href: "/" },
+  { name: "Projects", href: "/projects" },
+  { name: "About", href: "/about" },
+  { name: "Contact", href: "/contact" },
+];
+
+const isActive = (href: string) =>
+  href === "/"
+    ? pathname === "/"
+    : pathname.startsWith(href);
+---
+
+<header class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-zinc-950/70 border-b border-zinc-800">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
+
+    <!-- Logo -->
+    <a href="/" class="text-sm sm:text-lg font-bold hover:text-orange-400 transition">
+      Kerim Čamdžić
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden sm:flex gap-6 text-sm">
+      {links.map(({ name, href }) => (
+        <a
+          href={href}
+          class={`transition-colors ${
+            isActive(href)
+              ? "text-white font-semibold"
+              : "text-zinc-400 hover:text-white"
+          }`}
+        >
+          {name}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Mobile Nav (simple inline) -->
+    <nav class="flex sm:hidden gap-4 text-xs">
+      {links.map(({ name, href }) => (
+        <a
+          href={href}
+          class={`transition-colors ${
+            isActive(href)
+              ? "text-white font-semibold"
+              : "text-zinc-400 hover:text-white"
+          }`}
+        >
+          {name}
+        </a>
+      ))}
+    </nav>
+
+  </div>
+</header>

@@ -1,0 +1,77 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const meta = {
+  title: "Contact - Kerim Čamdžić",
+  description: "Get in touch regarding gameplay programming, engine work, or collaboration opportunities.",
+  image: "/images/homepage-og.jpg"
+};
+---
+
+<Layout {...meta}>
+  <section class="max-w-3xl mx-auto px-6 py-20">
+
+    <h1 class="text-3xl sm:text-4xl font-bold mb-8">
+      Contact
+    </h1>
+
+    <p class="text-zinc-400 leading-relaxed mb-12">
+      For gameplay programming roles, engine development, or technical collaboration — feel free to reach out.
+    </p>
+
+    <div class="space-y-6">
+
+      <!-- Email -->
+      <a
+        href="mailto:kerim@nbc66.dev"
+        class="block p-6 rounded-xl border border-zinc-800 bg-zinc-900/40 hover:border-orange-500/40 transition"
+      >
+        <h2 class="text-lg font-semibold text-white">
+          Email
+        </h2>
+        <p class="text-zinc-400 text-sm mt-2">
+          kerim@nbc66.dev
+        </p>
+        <p class="text-zinc-500 text-xs mt-2">
+          Preferred method for professional inquiries.
+        </p>
+      </a>
+
+      <!-- LinkedIn -->
+      <a
+        href="https://www.linkedin.com/in/kerim-camdzic-bih/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="block p-6 rounded-xl border border-zinc-800 bg-zinc-900/40 hover:border-orange-500/40 transition"
+      >
+        <h2 class="text-lg font-semibold text-white">
+          LinkedIn
+        </h2>
+        <p class="text-zinc-400 text-sm mt-2">
+          Professional networking and industry contact.
+        </p>
+      </a>
+
+      <!-- Discord -->
+      <div
+        class="p-6 rounded-xl border border-zinc-800 bg-zinc-900/40"
+      >
+        <h2 class="text-lg font-semibold text-white">
+          Discord
+        </h2>
+        <p class="text-zinc-400 text-sm mt-2">
+          nbc66
+        </p>
+        <p class="text-zinc-500 text-xs mt-2">
+          Primarily for technical discussions and modding communities.
+        </p>
+      </div>
+
+    </div>
+
+    <p class="text-zinc-500 text-sm mt-12">
+      Based in <strong>Bosnia and Herzegovina</strong> — open to remote opportunities.
+    </p>
+
+  </section>
+</Layout>

@@ -1,0 +1,16 @@
+---
+import { ICON_MAP, type IconType } from "../lib/icons";
+
+interface Props {
+  type: IconType;
+  class?: string;
+}
+
+const { type, class: className = "w-4 h-4" } = Astro.props as Props;
+
+const icon = ICON_MAP[type];
+---
+
+{icon && (
+  <img src={icon.src} loading="lazy" alt="" class={className} />
+)}
