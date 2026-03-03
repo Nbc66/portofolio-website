@@ -1,44 +1,59 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import githubicon from '../assets/GitHub_Invertocat_White.svg';
+import kerimPhoto from '../assets/kerim-photo.jpg';
+import Image from 'astro/components/Image.astro';
 ---
 <Layout
   title="Kerim Čamdžić - Gameplay Programmer"
   description="Gameplay & Systems Programmer specializing in Source SDK and C++. Explore my projects, including engine modifications, gameplay systems, and multiplayer features."
   image='images/default-og.png'>
-  <section class="min-h-screen flex items-center justify-center">
-  <div class="w-full max-w-5xl px-6">
+  <section class="min-h-screen flex items-center">
+  <div class="w-full max-w-6xl mx-auto px-6">
     
-    <div class="max-w-xl">
-      <h1 class="text-5xl font-bold tracking-tight
-			 transition-colors hover:text-orange-400">
-        Kerim Čamdžić
-      </h1>
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      
+      <!-- LEFT SIDE (Text) -->
+      <div>
+        <h1 class="text-5xl font-bold tracking-tight transition-colors hover:text-orange-400">
+          Kerim Čamdžić
+        </h1>
 
-      <p class="text-xl text-zinc-400 mt-4">
-        Gameplay Programmer (C++) — Engine Systems & Networking
-      </p>
+        <p class="text-xl text-zinc-400 mt-4">
+          Gameplay Programmer (C++) — Engine Systems & Networking
+        </p>
 
-      <p class="mt-6 text-zinc-500">
-        Focused on Source SDK 2013 engine modifications, gameplay architecture,
-        and multiplayer systems.
-      </p>
+        <p class="mt-6 text-zinc-500">
+          Focused on Source SDK 2013 engine modifications, gameplay architecture,
+          and multiplayer systems.
+        </p>
 
-      <div class="mt-8 flex gap-4">
-        <a href="/projects" class="bg-blue-500 px-6 py-3 rounded-lg font-medium">
-          View Projects
-        </a>
+        <div class="mt-8 flex gap-4">
+          <a href="/projects" class="bg-blue-500 px-6 py-3 rounded-lg font-medium">
+            View Projects
+          </a>
 
-        <a 
-		  href="https://github.com/Nbc66" 
-		  target="_blank" 
-		  rel="noopener noreferrer"
-		  class="inline-flex items-center gap-2 border border-zinc-700 px-6 py-3 rounded-lg hover:bg-zinc-800 transition"
-		>
-		<img id="github-icon" src={githubicon.src} alt="GitHub Icon" class="w-5 h-5" /> 
-		  GitHub
-		</a>
+          <a 
+            href="https://github.com/Nbc66" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 border border-zinc-700 px-6 py-3 rounded-lg hover:bg-zinc-800 transition"
+          >
+            <img src={githubicon.src} alt="GitHub Icon" class="w-5 h-5" />
+            GitHub
+          </a>
+        </div>
       </div>
+
+      <!-- RIGHT SIDE (Photo) -->
+      <div class="flex justify-center md:justify-end">
+        <Image 
+		  src={kerimPhoto} 
+		  alt="Photo of Kerim Čamdžić" 
+		  class="w-80 h-80 object-cover rounded-2xl border border-zinc-800 shadow-2xl hover:scale-105 transition duration-300"
+		/>
+      </div>
+
     </div>
 
   </div>
